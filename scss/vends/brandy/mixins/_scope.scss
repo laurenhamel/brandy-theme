@@ -1,0 +1,10 @@
+////
+/// @group brandy-scope
+////
+
+/// Helps to create a private variable scope
+@mixin private( $description... ) {
+  
+  @content;
+  
+}
