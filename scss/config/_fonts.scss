@@ -1,0 +1,11 @@
+@include google-font('Baloo');
+@include google-font('Raleway');
+
+$fonts: (
+  
+  'heading': ('Baloo', sans-serif),
+  'body': ('Raleway', sans-serif)
+  
+);
+
+$brandy-fonts-map: $fonts;
