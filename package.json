@@ -15,7 +15,8 @@
   },
   "homepage": "https://github.com/laurenhamel/brandy-theme#readme",
   "dependencies": {
-    "handlebars": "^4.0.11"
+    "handlebars": "^4.0.11",
+    "themeleon": "^3.0.2"
   },
   "devDependencies": {
     "bluebird": "^3.5.1",

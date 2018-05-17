@@ -24,8 +24,8 @@ var dirs = {
   svg: 'assets/svg',
   js: 'assets/js',
   tpl: 'views',
-  src: project('sass'),
-  docs: project('sassdoc')
+  src: project('brandy'),
+  docs: project('brandy/docs')
 };
 
 // Tasks configuration.
