@@ -1,0 +1,16 @@
+@include b('header') {
+  
+  $background: color('white', 'dark');
+  
+  padding: 1em 0;
+  background: $background;
+  color: color-contrast($background);
+  @include position(0 0 null map-get($sidebar, 'width'), fixed);
+  
+  @include e('title') {
+    font-weight: 500;
+    text-align: center;
+    margin: 0 0 0.5em 0;
+  };
+  
+};

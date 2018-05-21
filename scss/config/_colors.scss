@@ -8,19 +8,23 @@ $colors: (
     base: #E4BCBA
   ),
   
-  'grey': (
-    base: #EBEBEB
-  ),
-  
-  'gray': (
-    base: #EBEBEB
+  'white': (
+    base: #FFFFFF,
+    dark: #EBEBEB
   ),
   
   'purple': (
     light: #6C6A74,
     base: #36333D
+  ),
+  
+  'black': (
+    base: #000000,
+    light: #333333
   )
   
 );
 
 $brandy-colors-map: $colors;
+$brandy-dark-text: color('black', 'light');
+$brandy-light-text: color('white');
