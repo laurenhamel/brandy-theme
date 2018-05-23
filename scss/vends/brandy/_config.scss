@@ -121,6 +121,34 @@ $brandy-screens-map: (
   'desktop': min-width 801px
 ) !default;
 
+/// Sets the default map to be used for the `z()` function. This value
+/// can be set equal to a map or a variable which references a map.
+/// 
+/// @example scss - Sample definition
+///   $brandy-z-map: (
+///     'modal':  99,
+///     'overlay': 88,
+///     'menu': 77,
+///     'dropdown': 66,
+///     'header': 55,
+///     'default': auto,
+///     'normal': 1,
+///     'underneath': -1
+///   );
+///
+/// @type map
+/// @prop {number} <zLayer> - A z-index layer
+$brandy-z-map: (
+  'modal':  99,
+  'overlay': 88,
+  'menu': 77,
+  'dropdown': 66,
+  'header': 55,
+  'default': auto,
+  'normal': 1,
+  'below': -1
+) !default;
+
 /// Sets the default map to be used for the `scale-font()` function. This value
 /// can be set equal to a map or a variable which references a map. Each property
 /// name in the map should also correspond to a key in the `$brandy-screens-map`.

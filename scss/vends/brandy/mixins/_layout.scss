@@ -70,6 +70,36 @@
   
 }
 
+/// A shorthand for absolute positioning
+///
+/// @requires {function} position
+/// @params {list | number} $offset - Some `top`, `right`, `bottom`, and `left` values, respectively
+@mixin absolute( $offset ) {
+  
+  @include position($offset, absolute);
+  
+}
+
+/// A shorthand for relative positioning
+///
+/// @requires {function} position
+/// @params {list | number} $offset - Some `top`, `right`, `bottom`, and `left` values, respectively
+@mixin relative( $offset ) {
+  
+  @include position($offset, relative);
+  
+}
+
+/// A shorthand for fixed positioning
+///
+/// @requires {function} position
+/// @params {list | number} $offset - Some `top`, `right`, `bottom`, and `left` values, respectively
+@mixin fixed( $offset ) {
+  
+  @include position($offset, fixed);
+  
+}
+
 /// Sets `top`, `right`, `bottom`, `left`, and optionally `position` properties in one fell swoop
 ///
 /// @requires {function} is-number

@@ -1,0 +1,2 @@
+@mixin small { @include breakpoint(screen('small')) { @content; }; }
+@mixin medium { @include breakpoint(screen('medium')) { @content; }; }

@@ -1,0 +1,64 @@
+$highlight: (
+  'comment': #898ea4,
+  'prolog': #898ea4,
+  'doctype': #898ea4,
+  'cdata': #898ea4,
+  'punctuation': #5e6687,
+  'operator': #c76b29,
+  'boolean': #c76b29,
+  'number': #c76b29,
+  'property': #c08b30,
+  'tag': #3d8fd1,
+  'string': #22a2c9,
+  'selector': #6679cc,
+  'attr-name': #c76b29,
+  'entity': #22a2c9,
+  'url': #22a2c9,
+  'attr-value': #ac9739,
+  'keyword': #ac9739,
+  'control': #ac9739,
+  'directive': #ac9739,
+  'unit': #ac9739,
+  'statement': #22a2c9,
+  'regex': #22a2c9,
+  'atrule': #22a2c9,
+  'placeholder': #3d8fd1,
+  'variable': #3d8fd1,
+  
+);
+
+.namespace { opacity: .7 }
+
+.token {
+  
+  @each $token, $color in $highlight { &.#{$token} { color: $color; } }
+  
+  &.deleted { text-decoration: line-through; }
+  
+  &.inserted { border-bottom: 1px dotted #202746; text-decoration: none; }
+  
+  &.italic { font-style: italic; }
+  
+  &.important, &.bold { font-weight: bold; }
+  
+  &.important { color: #c94922; }
+  
+  &.entity { cursor: help; }
+  
+}
+
+.line-numbers {
+  
+  &-rows { 
+    border-right-color: #dfe2f1; 
+    
+    > span::before { color: #979db4; }
+  
+  }
+  
+}
+
+.line-highlight {
+  background-color: rgba(107, 115, 148, .2);
+  @include linear-gradient(to right, rgba(107, 115, 148, .2) 70%, rgba(107, 115, 148, 0));
+}

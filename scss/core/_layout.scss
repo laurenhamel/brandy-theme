@@ -1,0 +1,27 @@
+
+.layout-toggle {
+  display: none;
+
+  @include medium {
+    @include absolute(8px null null 20px);
+    font-size: 2em;
+    cursor: pointer;
+    color: color('white');
+    display: block;
+  };
+  
+}
+
+.sidebar-closed {
+  
+  @include medium {
+    
+    .sidebar { transform: translatex(-config('sidebar.width')); }
+
+    .main { padding-left: 0; }
+	
+	.header { left: 0; }
+    
+  };
+  
+}

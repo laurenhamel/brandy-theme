@@ -1,0 +1,236 @@
+@include b('main') {
+  
+  @include e('section') { margin-bottom: config('rhythm.vertical') * 3; };
+  
+};
+
+@include b('item') {
+
+  @include e('heading') {
+    color: color('black');
+    margin: config('rhythm.vertical') * 3 0 config('rhythm.vertical') 0;
+    position: relative;
+    font-size: 2em;
+    font-weight: 300;
+    float: left;
+  };
+  
+  @include e('name') { color: color('purple', 'light'); };
+
+  @include e('example') { margin-bottom: config('rhythm.vertical'); };
+  
+  @include e('example', 'code') {
+    position: static;
+    @include card(1);
+    word-wrap: break-word;
+    line-height: 1.42;
+  };
+  
+  @include e('code') {
+    padding-right: 7em;
+    clear: both;
+    cursor: pointer;
+    
+    @include m('togglable') {
+      
+      &::after {
+        @include absolute(null 0 -2.5em);
+        opacity: 0;
+        color: darken(color('grey'), 10%);
+        font-size: 0.8em;
+        transition: 0.2s ease-out;
+      }
+      
+      @include on-event {
+        
+        &::after { opacity: 1; }
+        
+      };
+
+      &[data-current-state="expanded"]::after { content: 'Click to collapse.'; }
+      &[data-current-state="collapsed"]::after { content: 'Click to expand.'; }
+      
+    };
+    
+  };
+  
+  @include e('anchor') {
+    
+    font-size: 0.6em;
+    color: lighten(color('maroon'), 20%);
+
+    @include medium {
+      @include absolute(null 101% 0.25em);
+      opacity: 0;
+      @include when-descendant-of('.item:hover') { opacity: 1; };
+    }
+    
+  }
+  
+  @include e('deprecated') {
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 5.5em;
+    margin-left: 1em;
+
+    strong {
+      float: left;
+      color: darken(red, 10%);
+      text-transform: uppercase;
+    }
+
+    p {
+      float: left;
+      margin: 0;
+      padding-left: 0.5em;
+    }
+    
+  };
+  
+  @include e('type') {
+    color: color('grey');
+    text-transform: capitalize;
+    font-size: 0.75em;
+  };
+  
+  @include e('alias', 'aliased') {
+    color: color('grey');
+    font-size: 0.8em;
+  };
+  
+  @include e('sub-heading') {
+    color: shade(color('blush'), 50%);
+    margin-top: 0;
+    margin-bottom: config('rhythm.vertical');
+    font-size: 1.2em;
+  };
+  
+  @include e('parameters') {
+    width: 100%;
+    margin-bottom: 1em;
+    border-collapse: collapse;
+
+    thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid color('grey');
+      border-top: none;
+      text-align: left;
+      color: mix(color('black'), color('white'), 70%);
+    }
+
+    tbody th { text-align: left; }
+
+    td, th {
+      padding: 0.5em 0.5em 0.5em 0;
+      vertical-align: top;
+      
+      @include medium { border-top: 1px solid color('grey'); };
+      
+    }
+    
+  };
+  
+  @include e('access') {
+    text-transform: capitalize;
+    color: color('purple');
+    font-size: 0.8em;
+  };
+  
+  @include e('since') {
+    float: right;
+    padding-top: 0.9em;
+    color: darken(color('grey'), 10%);
+    margin-bottom: 1em;
+  };
+  
+  @include e('source-link') {
+    @include absolute(1px 1px);
+    background: color('white');
+    padding: 1em;
+    z-index: z('default') + 1;
+    color: darken(color('grey'), 10%);
+  };
+  
+  @include e('cross-type') {
+    color: lighten(color('black'), 10%);
+    font-family: font('code');
+    font-size: 0.8em;
+  };
+  
+  @include e('description') {
+    margin-bottom: config('rhythm.vertical');
+    
+    &li { margin-bottom: 0; }
+    
+    @include m('inline') {
+      
+      > * {
+        display: inline-block;
+        margin: 0;
+      }
+      
+    };
+    
+  };
+  
+  @include e('code-wrapper') {
+    position: relative;
+    clear: both;
+    margin-bottom: config('rhythm.vertical');
+  };
+  
+  @include e('preview') {
+    
+    @include m('inline') {
+      padding: 2px 4px;
+      border: 1px solid rgba(color('black'), 0.1);
+      border-radius: 3px;
+    };
+    
+    @include m('block') {
+      @include size(2em);
+      @include absolute(140% 0);
+      top: calc(100% + 20px);
+      border: 1px solid rgba(color('black'), 0.1);
+      border-radius: 3px;
+    };
+    
+  };
+  
+};
+
+@include medium {
+  
+  tbody {
+
+    > .item {
+
+      @include e('paramater') {
+
+        &:first-of-type > td { border-top: none; }
+
+      };
+
+    }
+
+  }
+  
+};
+
+@include b('example') {
+  
+  @include e('description') {
+    padding: 1em;
+    background: color('white', 'dark');
+
+    p { margin: 0; }
+    
+  };
+  
+  @include e('code') {
+    
+    &[class*="language-"] { margin: 0; }
+    
+  };
+  
+};

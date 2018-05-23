@@ -1,7 +1,7 @@
-@mixin block( $name ) { .#{$name} { @content; } }
-@mixin element( $name ) { &__#{$name} { @content; } }
-@mixin modifier( $name ) { &--#{$name} { @content; } }
+@mixin block( $names... ) { @each $name in $names {  .#{unquote($name)} { @content; } } }
+@mixin element( $names... ) { @each $name in $names { &__#{unquote($name)} { @content; } } }
+@mixin modifier( $names... ) { @each $name in $names { &--#{unquote($name)} { @content; } } }
 
-@mixin b( $name ) { @include block($name) { @content; }; }
-@mixin e( $name ) { @include element($name) { @content; }; }
-@mixin m( $name ) { @include modifier($name) { @content; }; }
+@mixin b( $names... ) { @include block($names...) { @content; }; }
+@mixin e( $names... ) { @include element($names...) { @content; }; }
+@mixin m( $names... ) { @include modifier($names...) { @content; }; }

@@ -114,3 +114,24 @@
   @return map-deep-get($brandy-screens-map, $property);
   
 }
+
+/// Gets a value from the `$brandy-z-map`
+///
+/// @requires {function} str-split
+/// @requires {function} map-deep-get
+/// @requires {variable} $brandy-z-map
+/// @requires {function} map-has-keys
+/// @param {string} $property - A property from the z map given in dot notation
+/// @return {mixed}
+/// @throws 'Unknown z-layer `#{$property}`.'
+@function z( $property ) {
+  
+  @if ( not map-has-keys($brandy-z-map, $property) ) {
+    
+    @error 'Unknown z-layer `#{$property}`.'
+    
+  }
+  
+  @return map-deep-get($brandy-z-map, $property);
+  
+}

@@ -2,6 +2,23 @@
 /// @group brandy-states
 ////
 
+/// Sets an element's event state
+///
+/// @author Harry Roberts
+/// @param {boolean} $self [false] - Whether or not the include the current selector
+/// @param {list} $events [hover active focus] - The types of events to include
+@mixin on-event( $self: false, $events: hover active focus ) {
+  
+  $selectors: ();
+  
+  @each $event in $events { $selectors: append($selectors, unquote('&:#{$event}'), 'comma'); }
+  
+  @if( $self ) { $selectors: append($selectors, unquote('&'), 'comma'); }
+
+  #{$selectors} { @content; }
+  
+}
+
 /// Sets a property's normal and hover state
 ///
 /// @author Kyle Brumm
@@ -50,6 +67,78 @@
   @include on-hover-focus( $property, $normal, $hover-focus );
   
 }
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-hover-focus-active( $property, $normal, $event ) {
+  
+  #{$property}: $normal;
+  &:hover, &:focus, &:active { #{$property}: $normal; }
+  
+};
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @alias on-hover-focus-active
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-hover-active-focus( $property, $normal, $event ) {
+  
+  @include on-hover-focus-active($property, $normal, $event);
+  
+};
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @alias on-hover-focus-active
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-focus-hover-active( $property, $normal, $event ) {
+  
+  @include on-hover-focus-active($property, $normal, $event);
+  
+};
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @alias on-hover-focus-active
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-focus-active-hover( $property, $normal, $event ) {
+  
+  @include on-hover-focus-active($property, $normal, $event);
+  
+};
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @alias on-hover-focus-active
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-active-hover-focus( $property, $normal, $event ) {
+  
+  @include on-hover-focus-active($property, $normal, $event);
+  
+};
+
+/// Sets a property's normal, hover, focus, and active state
+///
+/// @alias on-hover-focus-active
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $hover - Some property value for the hover state
+@mixin on-active-focus-hover( $property, $normal, $event ) {
+  
+  @include on-hover-focus-active($property, $normal, $event);
+  
+};
 
 /// Sets a property's normal and active state
 ///
@@ -204,5 +293,17 @@
   
   #{$property}: $normal;
   &:read-write { #{$property}: $read-write; }
+  
+}
+
+/// Sets a property's normal and empty state
+///
+/// @param {string} $property - Some property to set
+/// @param {mixed} $normal - Some property value for the normal state
+/// @param {mixed} $enabled - Some property value for the empty state
+@mixin on-empty( $property, $normal, $empty ) {
+  
+  #{$property}: $normal;
+  &:empty { #{$property}: $empty; }
   
 }

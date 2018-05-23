@@ -1,4 +1,77 @@
-* {
+*, *::after, *::before {
   position: relative;
   box-sizing: border-box;
 }
+
+body { 
+  font-size: 14px;
+  font-family: font('body');
+  margin: 0;
+  line-height: 1.5;
+}
+
+a {
+  transition: .15s;
+  text-decoration: none;
+  color: color('maroon');
+  
+  &:hover {
+    &, code { color: color('black'); }
+  }
+  
+}
+
+table p { margin: 0 0 (config('rhythm.vertical') / 3); }
+
+pre {
+  direction: ltr;
+  white-space: pre;
+  tabs-size: 2;
+  hyphens: none;
+  
+  &[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+  }
+  
+}
+
+code {
+  font-family: font('code');
+  
+  @include when-child-of(':not(pre)') { 
+    color: color('purple', 'light');
+    white-space: nowrap;
+    font-weight: normal;
+  };
+  
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: font('heading'); }
+
+@include small {
+  
+  table, tbody, tr, td, th { display: block; }
+  
+  thead { @include visually-hidden; }
+  
+  tr {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 2px solid color('grey');
+  }
+  
+  td, th {
+    
+    &::before {
+      content: attr(data-label) ': ';
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    
+    p { display: inline; }
+    
+  }
+  
+};

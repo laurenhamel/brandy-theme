@@ -1984,3 +1984,37 @@
   @return $scale;
   
 }
+
+/// Clamps a numeric value between a `$min` and `$max`
+///
+/// @requires {function} is-number
+/// @param {number} $number - The number to clamp between `$min` and `$max`
+/// @param {number} $min - Some minimum value
+/// @param {number} $max - Some maximum value
+/// @throws 'Function `clamp` expects a number for argument `$number` but `#{type-of($number)}` was given.'
+/// @throws 'Function `clamp` expects a number for argument `$min` but `#{type-of($min)}` was given.'
+/// @throws 'Function `clamp` expects a number for argument `$max` but `#{type-of($max)}` was given.'
+/// @returns {numbers}
+@function clamp( $number, $min, $max ) {
+  
+  @if( not is-number($number) ) {
+    
+    @error 'Function `clamp` expects a number for argument `$number` but `#{type-of($number)}` was given.';
+    
+  }
+  
+  @if( not is-number($min) ) {
+    
+    @error 'Function `clamp` expects a number for argument `$min` but `#{type-of($min)}` was given.';
+    
+  }
+  
+  @if( not is-number($max) ) {
+    
+    @error 'Function `clamp` expects a number for argument `$max` but `#{type-of($max)}` was given.';
+    
+  }
+  
+  @return min(max($number, $min), $max);
+  
+}

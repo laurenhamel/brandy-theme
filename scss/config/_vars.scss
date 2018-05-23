@@ -1,5 +1,13 @@
-$sidebar: (
+$config: (
   
-  'width': 250px
+  'sidebar': (
+    'width': 280px
+  ),
+  
+  'rhythm': (
+    'vertical': 1.5rem
+  )
   
 );
+
+$brandy-config-map: $config;

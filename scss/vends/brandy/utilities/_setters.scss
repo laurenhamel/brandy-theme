@@ -110,3 +110,25 @@
   $brandy-screens-map: map-deep-set($brandy-screens-map, $key, $value) !global;
   
 }
+
+/// Sets a value in the `$brandy-z-map`
+///
+/// @requires {function} str-split
+/// @requires {function} map-deep-set
+/// @requires {function} map-has-keys
+/// @requires {variable} $brandy-screens-map
+/// @param {string} $key - A key in the z map given in dot notation
+/// @param {mixed} $value - Some value
+/// @param {boolean} $overwrite [false] - Allows or disallows overwriting of existing properties
+/// @throws 'Z-layer `#{$key}` already exists and overwriting was not permitted.'
+@mixin z( $key, $value, $overwrite: false ) {
+  
+  @if ( map-has-keys($brandy-z-map, $key) and $overwrite == false ) {
+    
+    @error 'Z-layer `#{$key}` already exists and overwriting was not permitted.'
+    
+  }
+  
+  $brandy-z-map: map-deep-set($brandy-z-map, $key, $value) !global;
+  
+}

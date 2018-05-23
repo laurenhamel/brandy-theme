@@ -1,0 +1,33 @@
+@include b('footer') {
+  background: color('grey', 'light');
+  padding: 1em 0;
+  
+  .container { position: relative; }
+  
+  @include e('project') {
+    
+    @include m('info') { float: left; };
+    
+  };
+  
+  @include e('watermark') {
+    position: absolute;
+    right: 0;
+    top: -0.7em;
+
+    img {
+      display: block;
+      max-width: 7em;
+    }
+    
+  };
+  
+};
+
+@include b('project-info') {
+  
+  @include e('name', 'version', 'license') { display: inline-block; }
+  @include e('version', 'license') { color: color('grey', 'darker'); }
+  @include e('license') { text-indent: -.25em; }
+  
+};

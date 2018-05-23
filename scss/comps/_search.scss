@@ -1,19 +1,62 @@
 @include b('searchbar') {
-  
+  @include clearfix;
   display: inline-block;
   float: right;
-  @include clearfix;
-  
-  @include e('form') { 
-    float: right;
+
+  @include small {
+    display: block;
+    float: none;
   };
   
-  @include e('field') { 
-    border: 0;
+  @include e('form') {
+    float: right;
+    position: relative;
+
+    @include small { float: none; };
+
+    @include medium { min-width: 15em; };
+    
+  };
+  
+  @include e('field') {
+    border: none;
     padding: .5em;
     font-size: 1em;
     margin: 0;
     width: 100%;
+    background-color: color('white');
+  };
+  
+  @include e('suggestions') {
+    @include absolute(100% 0 null 0);
+    @include card(1);
+    background: color('white');
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: z('normal') + 1;
+    @include on-empty(display, block, none);
+    
+    .selected { background: color('grey'); }
+
+    li {
+      border-bottom: 1px solid color('grey', 'light');
+
+      &:last-of-type { border: none; }
+      
+    }
+
+    a {
+      display: block;
+      padding: 0.5em;
+      font-size: 0.9em;
+
+      @include on-event { background: color('grey', 'light'); };
+      
+    }
+
+    code { margin-right: .5em; }
+    
   };
   
 };

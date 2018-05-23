@@ -1,1 +1,16 @@
 @import 'mixins/bem';
+@import 'mixins/screens';
+
+/// Gives a card depth effect.
+/// @param {Number} $depth - depth level [between 1 and 5]
+/// @link http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality Google Design
+/// @requires {function} clamp
+/// @requires {function} top-shadow
+/// @requires {function} bottom-shadow
+/// @requires {variable} light-grey
+@mixin card($depth) {
+  
+  background-color: color('white');
+  @include padding-x( .25em );
+  
+}

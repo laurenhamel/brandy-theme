@@ -1,0 +1,107 @@
+@include b('sidebar') {
+  background-color: color('white');
+  
+  @include medium {
+    @include fixed(0 null 0 0);
+    overflow: auto;
+    box-shadow: 1px 0 1.5px rgba(color('black'), 0.12);
+    width: config('sidebar.width');
+    z-index: z('normal') + 1;
+    border-right: 1px solid color('grey', 'light');
+    transition: .2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  };
+  
+  @include small { margin-top: 4em; };
+  
+  @include e('annotation') { color: color('purple'); };
+  
+  $levels: ();
+  $levels: append($levels, 1.5em);
+  $levels: append($levels, nth($levels, 1) + 1em);
+  $levels: append($levels, nth($levels, 2) + 2em);
+  
+  @include e('item') {
+    font-size: 0.9em;
+
+    a {
+      padding: 0.5em nth($levels, 3);
+      display: block;
+      text-decoration: none;
+      color: color('black');
+    }
+
+    @include on-event { background: color('white', 'dark'); }
+
+    &.is-collapsed + * { display: none; }
+    
+    @include m('heading') {
+      padding: 1em nth($levels, 1);
+
+      a { font-weight: bold; }
+      
+    };
+    
+    @include m('sub-heading') {
+      padding: 0.5em nth($levels, 2);
+
+      a { color: color('grey', 'dark'); }
+      
+    }
+    
+    @include m('heading', 'sub-heading') {
+      position: relative;
+
+      &:after {
+        @include absolute(50% 2em);
+        content: '\25BC';
+        margin-top: -0.5em;
+        color: color('grey');
+        font-size: 0.7em;
+      }
+
+      &.is-collapsed:after { content: '\25B6';  }
+
+      a {
+        padding: 0;
+        display: inline;
+      }
+      
+    };
+    
+  };
+  
+  @include e('description') {
+    color: color('grey', 'light');
+    padding-right: 2em;
+  };
+  
+  @include e('header') { 
+    border-bottom: 1px solid color('grey', 'light'); 
+    font-weight: bold;
+  }
+  
+  @include e('title') { 
+    @include ellipsis; 
+    font-size: 1em;
+    margin: 0;
+    padding: 1.45em;
+  }
+  
+};
+
+.btn-toggle {
+  background: color('white', 'dark');
+  border: none;
+  border-bottom: 1px solid color('grey', 'light');
+  display: block;
+  padding: 1em;
+  width: 100%;
+  cursor: pointer;
+  color: color('grey', 'dark');
+  font-weight: bold;
+  margin: 0;
+  transition: 0.15s ease-out;
+
+  @include on-event { background: color('grey', 'light'); }
+  
+}

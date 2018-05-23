@@ -1,0 +1,30 @@
+@include b('header') {
+  @include clearfix;
+  @include fixed(0 0 null config('sidebar.width'));
+  box-shadow: 0 2px 5px rgba(0,0,0,.26);
+  padding: 1em 0;
+  background: color('maroon');
+  color: color('grey', 'light');
+  z-index: z('dropdown');
+  
+  @include small { left: 0; };
+  
+  @include medium { transition: .2s cubic-bezier(0.215, 0.61, 0.355, 1); };
+
+  @include e('title') {
+    font-weight: 500;
+    text-align: center;
+    margin: 0 0 0.5em 0;
+
+    a { color: color('grey', 'light'); }
+
+    @include medium {
+      float: left;
+      font-size: 1em;
+      margin-top: .25em;
+      margin-bottom: 0;
+    };
+    
+  };
+  
+};
