@@ -20,10 +20,9 @@ var project = function () {
 var dirs = {
   scss: 'scss',
   css: 'assets/css',
-  img: 'assets/img',
-  svg: 'assets/svg',
+  images: 'assets/images',
   js: 'assets/js',
-  tpl: 'views',
+  template: 'views',
   src: project('brandy'),
   docs: project('brandy/docs')
 };
@@ -57,8 +56,8 @@ var config = {
       files: ['<%= dirs.js %>/**/*.js'],
       tasks: ['dump:js']
     },
-    tpl: {
-      files: ['<%= dirs.tpl %>/**/*.swig'],
+    template: {
+      files: ['<%= dirs.template %>/**/*.{swig,handlebars}'],
       tasks: ['sassdoc:develop']
     }
   },
@@ -108,9 +107,9 @@ var config = {
     dist: {
       files: [{
         expand: true,
-        cwd: '<%= dirs.svg %>',
+        cwd: '<%= dirs.images %>',
         src: '{,*/}*.svg',
-        dest: '<%= dirs.svg %>'
+        dest: '<%= dirs.images %>'
       }]
     }
   },
@@ -119,9 +118,9 @@ var config = {
     dist: {
       files: [{
         expand: true,
-        cwd: '<%= dirs.img %>',
+        cwd: '<%= dirs.images %>',
         src: '{,*/}*.{gif,jpeg,jpg,png}',
-        dest: '<%= dirs.img %>'
+        dest: '<%= dirs.images %>'
       }]
     }
   },
@@ -190,7 +189,10 @@ module.exports = function (grunt) {
   grunt.registerTask('dist', [
     'uglify:dist',
     'newer:svgmin:dist',
-    'newer:imagemin:dist'
+    'newer:imagemin:dist',
+    'dump:js',
+    'dump:css',
+    'dump:images'
   ]);
 
 };
