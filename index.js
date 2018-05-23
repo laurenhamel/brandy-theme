@@ -1,16 +1,37 @@
 /**
- * Themeleon template helper, using consolidate.js module.
+ * Rendering engine, using handlebars.js
+ */
+const handlebars = require('handlebars');
+
+/**
+ * Extend the rendering engine, using handlebars-helpers
+ */
+const helpers = require('handlebars-helpers')({handlebars: handlebars});
+
+/**
+ * Rendering engine helper, using consolidate.js
+ *
+ * See <https://github.com/tj/consolidate.js>
+ */
+const consolidate = require('consolidate');
+
+/**
+ * Set the rendering engine
+ */
+consolidate.requires.handlebars = handlebars;
+
+/**
+ * Themeleon template helper
  *
  * See <https://github.com/themeleon/themeleon>.
- * See <https://github.com/tj/consolidate.js>.
  */
-var themeleon = require('themeleon')().use('consolidate');
+const themeleon = require('themeleon')().use(consolidate);
 
 /**
  * Utility function we will use to merge a default configuration
  * with the user object.
  */
-var extend = require('extend');
+const extend = require('extend');
 
 /**
  * SassDoc extras (providing Markdown and other filters, and different way to
@@ -18,7 +39,13 @@ var extend = require('extend');
  *
  * See <https://github.com/SassDoc/sassdoc-extras>.
  */
-var extras = require('sassdoc-extras');
+const extras = require('sassdoc-extras');
+
+/**
+ * Utility functions used for file handling
+ */
+const fs = require('fs');
+const path = require('path');
 
 /**
  * The theme function. You can directly export it like this:
@@ -30,26 +57,26 @@ var extras = require('sassdoc-extras');
  *
  * The theme function describes the steps to render the theme.
  */
-var theme = themeleon(__dirname, function (t) {
+const theme = themeleon(__dirname, function (t) {
   /**
    * Copy the assets folder from the theme's directory in the
    * destination directory.
    */
   t.copy('assets');
 
-  var options = {
+  const data = extend(t.ctx, {
     partials: {
       // Add your partial files here.
       // foo: 'views/foo.handlebars',
       // 'foo/bar': 'views/foo/bar.handlebars',
     },
-  };
+  }, true);
 
   /**
    * Render `views/index.handlebars` with the theme's context (`ctx` below)
    * as `index.html` in the destination directory.
    */
-  t.handlebars('views/index.handlebars', 'index.html', options);
+  t.handlebars(path.resolve(__dirname, 'views/index.handlebars'), data).then((html) => fs.writeFileSync(`${t.dest}/index.html`, html));
 });
 
 /**
@@ -61,7 +88,7 @@ var theme = themeleon(__dirname, function (t) {
  * configuration.
  */
 module.exports = function (dest, ctx) {
-  var def = {
+  const def = {
     display: {
       access: ['public', 'private'],
       alias: false,

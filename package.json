@@ -15,7 +15,10 @@
   },
   "homepage": "https://github.com/laurenhamel/brandy-theme#readme",
   "dependencies": {
+    "consolidate": "^0.15.1",
     "handlebars": "^4.0.11",
+    "handlebars-helpers": "^0.10.0",
+    "path": "^0.12.7",
     "themeleon": "^3.0.2"
   },
   "devDependencies": {

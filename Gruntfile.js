@@ -57,7 +57,7 @@ var config = {
       tasks: ['dump:js']
     },
     template: {
-      files: ['<%= dirs.template %>/**/*.{swig,handlebars}'],
+      files: ['<%= dirs.template %>/**/*.handlebars'],
       tasks: ['sassdoc:develop']
     }
   },
@@ -190,9 +190,9 @@ module.exports = function (grunt) {
     'uglify:dist',
     'newer:svgmin:dist',
     'newer:imagemin:dist',
-    'dump:js',
+    /*'dump:js',
     'dump:css',
-    'dump:images'
+    'dump:images'*/
   ]);
 
 };
