@@ -16,7 +16,7 @@
   
   @include medium {
     
-    .sidebar { transform: translatex(-config('sidebar.width')); }
+    .sidebar { transform: translatex( -#{config('sidebar.width')} ); }
 
     .main { padding-left: 0; }
 	
