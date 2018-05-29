@@ -1,7 +1,8 @@
 $config: (
   
   'sidebar': (
-    'width': 280px
+    'width': 280px,
+    'transition': .2s cubic-bezier(.215, .61, .355, 1)
   ),
   
   'rhythm': (

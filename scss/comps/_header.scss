@@ -9,7 +9,7 @@
   
   @include small { left: 0; };
   
-  @include medium { transition: .2s cubic-bezier(0.215, 0.61, 0.355, 1); };
+  @include medium { transition: config('sidebar.transition'); };
 
   @include e('title') {
     font-weight: 500;
