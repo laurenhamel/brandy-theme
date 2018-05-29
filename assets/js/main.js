@@ -52,6 +52,7 @@ class Sidebar {
       $('body').toggleClass('sidebar-closed');
 
       const alt = $this.html();
+      
       $this.html($this.data('alt'));
       $this.data('alt', alt);
       
@@ -126,7 +127,7 @@ class Sidebar {
 
         this.index[slug] = collapsed;
 
-        $(`[${this.conf.indexAttribute}="${slug}"]`)[fn](this.config.collapsedClass);
+        $(`[${this.config.indexAttribute}="${slug}"]`)[fn](this.config.collapsedClass);
         
       }, this));
 

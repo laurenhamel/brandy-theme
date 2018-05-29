@@ -61,6 +61,7 @@ var Sidebar = function () {
         $('body').toggleClass('sidebar-closed');
 
         var alt = $this.html();
+
         $this.html($this.data('alt'));
         $this.data('alt', alt);
       });
@@ -135,7 +136,7 @@ var Sidebar = function () {
 
           this.index[slug] = collapsed;
 
-          $('[' + this.conf.indexAttribute + '="' + slug + '"]')[fn](this.config.collapsedClass);
+          $('[' + this.config.indexAttribute + '="' + slug + '"]')[fn](this.config.collapsedClass);
         }, _this));
 
         collapsed = !collapsed;
