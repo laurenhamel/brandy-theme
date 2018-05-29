@@ -1,0 +1,39 @@
+{{#if (eq _data.length 0)}}
+
+  <section class="main__section">
+    <h2 class="main__heading">Seems like nothing has been documented yet!</h2>
+  </section>
+
+{{else}}
+
+{{#each _data.byGroupAndType }}
+.
+  <section class="main__section">
+    <h1 class="main__heading" id="{{lookup @root.groups @key}}">
+      <div class="container">
+        {{lookup @root.groups @key}}
+      </div>
+    </h1>
+    
+    {{#each this}}
+      {{#if (gt this.length 0)}} 
+        <section class="main__sub-section" id="{{@../key}}-{{@key}}">
+          <h2 class="main__heading--secondary">
+            <div class="container">
+              {{@key}}s
+            </div>
+          </h2>
+
+          {{#each this}}
+            {{> item self=this parent=../.}}
+          {{/each}}
+        </section>
+      {{/if}}
+    
+    {{/each}}
+
+  </section>
+
+{{/each}}
+
+{{/if}}

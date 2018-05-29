@@ -18,6 +18,7 @@ var project = function () {
 
 // Project specific paths.
 var dirs = {
+  root: './',
   scss: 'scss',
   css: 'assets/css',
   images: 'assets/images',
@@ -53,12 +54,19 @@ var config = {
       tasks: ['sass:develop', 'autoprefixer:develop', 'dump:css']
     },
     js: {
-      files: ['<%= dirs.js %>/**/*.js'],
-      tasks: ['dump:js']
+      files: ['<%= dirs.js %>/**/*.js', '!<%= dirs.js %>/**/*.min.js'],
+      tasks: ['jshint', 'babel', 'uglify:dist', 'dump:js']
     },
     template: {
       files: ['<%= dirs.template %>/**/*.handlebars'],
       tasks: ['sassdoc:develop']
+    },
+    config: {
+      files: ['index.js', 'Gruntfile.js', '.babelrc', '.jshintrc'],
+      tasks: ['sassdoc:develop'],
+      options: {
+        reload: true
+      }
     }
   },
 
@@ -98,7 +106,7 @@ var config = {
     options: {},
     dist: {
       files: {
-        '<%= dirs.js %>/main.min.js': ['<%= dirs.js %>/main.js']
+        '<%= dirs.js %>/main.min.js': ['<%= dirs.js %>/main.babel.js']
       }
     }
   },
@@ -131,13 +139,34 @@ var config = {
     options: {
       verbose: true,
       dest: dirs.docs,
-      theme: './',
+      package: '<%= dirs.src %>/package.json',
+      config: '<%= dirs.src %>/.sassdocrc',
+      //theme: dirs.root,
       // Disable cache to enable live-reloading.
       // Usefull for some template engines (e.g. Swig).
       cache: false,
     },
     develop: {
       src: '<%= dirs.src %>'
+    }
+  },
+  
+  babel: {
+    dev: {
+      files: {
+        '<%= dirs.js %>/main.babel.js': '<%= dirs.js %>/main.js'
+      }
+    }
+  },
+  
+  jshint: {
+    options: {
+      jshintrc: true
+    },
+    dev: {
+      files: {
+        src: ['<%= dirs.js %>/**/*.js', '!<%= dirs.js %>/**/*.{min,babel}.js']
+      }
     }
   }
 
@@ -172,7 +201,7 @@ module.exports = function (grunt) {
 
   // Development task.
   // While working on a theme.
-  grunt.registerTask('develop', 'Development task', function () {
+  grunt.registerTask('dev', 'Development task', function () {
     var tasks = ['browserSync:develop', 'watch'];
     var docs = fs.existsSync(dirs.docs);
 
@@ -190,9 +219,11 @@ module.exports = function (grunt) {
     'uglify:dist',
     'newer:svgmin:dist',
     'newer:imagemin:dist',
-    /*'dump:js',
+    'dump:js',
     'dump:css',
-    'dump:images'*/
+    'dump:images'
   ]);
+  
+  grunt.registerTask('default', ['dev']);
 
 };

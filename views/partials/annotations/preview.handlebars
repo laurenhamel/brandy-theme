@@ -1,0 +1,90 @@
+{{! Placeholders}}
+{{#if (eq self.context.type 'placeholder')}}
+
+<div class="item__code-wrapper">
+  
+  <pre class="item__code item__code--togglable language-scss"
+    data-current-state="collapsed"
+    data-expanded="%{{self.context.name}} { {{self.context.code}} }"
+    data-collapsed="%{{self.context.name}} { ... }"><code class="js-autoindent">%{{self.context.name}} { ... }</code></pre>
+
+  {{#if @root.basePath}}
+    <a href="{{@root.basePath}}/{{self.file.path}}#L{{self.context.line.start}}-L{{self.context.line.end}}" 
+       class="item__source-link" 
+       target="_blank">
+      View source
+    </a>
+  {{/if}}
+  
+</div>
+
+{{! Variables}}
+{{else if (eq self.context.type 'variable')}}
+
+<div class="item__code-wrapper">
+  <pre class="item__code language-scss"><code class="js-autoindent">${{self.context.name}}: {{self.context.value}}{{#isnt self.context.scope 'private'}} !{{self.context.scope}}{{/isnt}};</code></pre>
+
+  {{#and (gt (indexOf (lowercase self.context.type) 'color') -1) (chroma self.resolvedValue 'isColor')}}
+    <span class="color-preview--block" style="background: {{self.resolvedValue}};"></span>
+  {{/and}}
+
+  {{#if @root.basePath}}
+    <a href="{{@root.basePath}}/{{self.file.path}}#L{{self.context.line.start}}-L{{self.context.line.end }}" 
+       class="item__source-link" 
+       target="_blank">
+      View source
+    </a>
+  {{/if}}
+  
+</div>
+
+{{! Vanilla CSS}}
+{{else if (eq self.context.type 'css')}}
+
+<div class="item__code-wrapper">
+  <pre class="item__code item__code--togglable language-scss"
+    data-current-state="collapsed"
+    data-expanded="<code>{{self.context.name}} {
+  {{self.context.value}}
+}</code>"
+    data-collapsed="{{self.context.name}} { ... }"><code class="js-autoindent">{{self.context.name}} { ... }</code></pre>
+</div>
+
+{{! Functions and Mixins}}
+{{else}}
+
+{{set 'parameterString' '' self}}
+{{#each self.parameter}}
+  {{set 'parameterValue' (concat '$' name) ../self}}
+  {{#if default}}
+    {{set 'parameterValue' (concat ../self.parameterValue ': ' default) ../self}}
+  {{/if}}
+  {{#if (eq (lowercase type) 'arglist')}}
+    {{set 'parameterValue' (concat ../self.parameterValue '...') ../self}}
+  {{/if}}
+  {{#if @first}}
+    {{set 'parameterString' ../self.parameterValue ../self}}
+  {{else}}
+    {{set 'parameterString' (concat ../self.parameterString ', ' ../self.parameterValue) ../self}}
+  {{/if}}
+{{/each}}
+{{unset 'parameterValue' self}}
+
+<div class="item__code-wrapper">
+  <pre class="item__code  item__code--togglable language-scss"
+    data-current-state="collapsed"
+    data-expanded="@{{self.context.type}} {{self.context.name}}({{self.parameterString}}) { {{self.context.code}} }"
+    data-collapsed="@{{self.context.type}} {{self.context.name}}({{self.parameterString}}) { ... }"><code class="js-autoindent">@{{self.context.type}} {{self.context.name}}({{self.parameterString}}) { ... }</code></pre>
+
+  {{#if @root.basePath}}
+    <a href="{{@root.basePath}}/{{self.file.path}}#L{{self.context.line.start}}-L{{self.context.line.end}}" 
+       class="item__source-link" 
+       target="_blank">
+      View source
+    </a>
+  {{/if}}
+</div>
+
+{{unset 'parameterString' self}}
+
+{{/if}}

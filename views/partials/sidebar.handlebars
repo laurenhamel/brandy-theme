@@ -1,0 +1,82 @@
+<div class="sidebar__header">
+  
+  <h1 class="sidebar__title">
+    
+    {{#if display.logo}}
+    
+      <a href="{{default package.homepage '//laurenhamel.github.io/brandy'}}">
+        {{> logo}}
+      </a>
+    
+    {{else}}
+    
+      <a href="{{default package.homepage '//laurenhamel.github.io/brandy'}}">
+        {{titleize package.name}}
+      </a>
+
+    {{/if}}
+    
+    {{#if package.version}}
+      <div class="sidebar__title--version">v{{package.version}}</div>
+    {{/if}}
+    
+  </h1>
+
+</div>
+
+<div class="sidebar__body">
+  
+  {{! Nothing available to display. }}
+  {{#if (eq data.length 0)}}
+  
+    <p class="sidebar__item  sidebar__item--heading">No documented item.</p>
+  
+
+  {{! Something available to display. }}
+  {{else}}
+  
+    <button type="button" class="btn-toggle  js-btn-toggle" data-alt="Open all">Close all</button>
+
+    {{#each _data.byGroupAndType}}
+  
+      <p class="sidebar__item  sidebar__item--heading" data-slug="{{@key}}">
+        <a href="#{{@key}}">{{lookup @root.groups @key}}</a>
+      </p>
+
+      {{#each this}}
+    
+        {{#if @first}}<div>{{/if}}
+
+        {{#if (gt this.length 0)}}
+  
+          <p class="sidebar__item sidebar__item--sub-heading" data-slug="{{@../key}}-{{@key}}">
+            <a href="#{{@../key}}-{{@key}}">{{@key}}s</a>
+          </p>
+
+          {{#each this}}
+            
+            {{#if @first}}<ul class="list-unstyled">{{/if}}
+
+              <li class="sidebar__item sassdoc__item" data-group="{{@../../key}}" data-name="{{context.name}}" data-type="{{context.type}}">
+                
+              <a href="#{{@../../key}}-{{context.type}}-{{context.name}}">{{context.name}}
+              {{#if (eq access.[0] "private")}}<span class="sidebar__annotation sidebar__annotation--private">private</span>{{/if}}
+              {{#if alias}}<span class="sidebar__annotation sidebar__annotation--alias">alias</span>{{/if}}
+              </a>
+            </li>
+  
+            {{#if @last}}</ul>{{/if}}
+  
+          {{/each}}
+  
+        {{/if}}
+  
+        {{#if @last}}</div>{{/if}}
+  
+      {{/each}}
+
+    {{/each}}
+  
+  {{/if}}
+  
+</div>

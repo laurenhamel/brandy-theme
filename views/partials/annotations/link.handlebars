@@ -1,0 +1,19 @@
+{{#if (gt self.link.length 0)}}
+
+  <h3 class="item__sub-heading">Links</h3>
+
+  <ul class="list-unstyled">
+    {{#each self.link}}
+      <li>
+        <a href="{{url}}">
+          {{#if caption}}
+            {{caption}}
+          {{else}}
+            {{url}}
+          {{/if}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+{{/if}}

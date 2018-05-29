@@ -1,0 +1,33 @@
+{{set 'titleDisplayed' false self}}
+{{set 'rootDisplay' self.[@root].display self}}
+
+{{#each self.see}}
+
+  {{#if (and (gt (indexOf ../self.rootDisplay.access access) -1) (not (and ../self.rootDisplay.alias alias)))}}
+
+    {{#if (not ../self.titleDisplayed)}}
+
+      {{set 'titleDisplayed' true ../self}}
+
+      <h3 class="item__sub-heading">See</h3>
+      <ul class="list-unstyled">
+        
+    {{/if}}
+
+    <li>
+      <span class="item__cross-type">[{{context.type}}]</span> 
+      <a href="#{{context.type}}-{{context.name}}">
+        <code>{{context.name}}</code>
+      </a>
+    </li>
+        
+  {{/if}}
+
+{{/each}}
+
+{{#if self.titleDisplayed}}
+  </ul>
+{{/if}}
+
+{{unset 'titleDisplayed' self}}
+{{unset 'rootDisplay' self}}

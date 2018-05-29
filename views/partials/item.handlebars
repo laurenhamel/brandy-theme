@@ -1,0 +1,27 @@
+<section class="main__item container item{{#if self.alias}} item--alias{{/if}}{{#contains self 'deprecated'}} item--deprecated{{/contains}}"
+         id="{{self.group.[0]}}-{{self.context.type}}-{{self.context.name}}">
+
+  {{> 'annotations/name'}}
+  
+  {{> 'annotations/deprecated'}}
+
+  {{> 'annotations/preview'}}
+
+  {{#not self.alias}}
+    
+    {{set 'typeOfAnnotations' (lookup @root.display.annotations self.context.type) self.context}}
+    {{set '@root' @root self}}
+  
+    {{#forIn self.context.typeOfAnnotations}}
+  
+      {{> (concat 'annotations/' .) self=../self parent=../parent}}
+  
+    {{/forIn}}
+  
+  {{else}}
+  
+    <p>Refer to <a href="#{{self.context.type}}-{{self.alias}}">{{self.alias}}</a>.</p>
+  
+  {{/not}}
+
+</section>

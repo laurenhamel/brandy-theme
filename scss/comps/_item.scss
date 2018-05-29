@@ -94,7 +94,7 @@
   };
   
   @include e('alias', 'aliased') {
-    color: color('grey');
+    color: color('blush');
     font-size: 0.8em;
   };
   
@@ -218,10 +218,15 @@
 };
 
 @include b('example') {
+  padding: 0;
   
   @include e('description') {
+    
+    $background: color('blush');
+    
     padding: 1em;
-    background: color('white', 'dark');
+    background: $background;
+    color: color-contrast($background);
 
     p { margin: 0; }
     

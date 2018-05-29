@@ -1,0 +1,24 @@
+<h3 class="item__heading">
+  
+  {{#and self.access (not self.access "public")}} 
+    <span class="item__access">[{{self.access}}]</span>
+  {{/and}}
+
+  <a class="item__name" href="#{{self.context.type}}-{{self.context.name}}">{{self.context.name}}</a>
+
+  {{#and @root.display.alias (gt self.aliased.length 0)}}
+    <span class="item__aliased">(aliased as
+    {{#each self.aliased}}
+      <a href="#{{self.type}}-{{.}}"><code>{{.}}</code></a>
+    {{/each}}
+    )</span>
+  {{/and}}
+
+  {{#if self.alias}}
+    <span class="item__alias">(alias for <a href="#{{self.context.type}}-{{self.alias}}"><code>{{self.alias}}</code></a>)</span>
+  {{/if}}
+</h3>
+
+{{#eq self.since.length 1}}
+  <span class="item__since">Since {{self.since.0.version}}{{#if self.since.0.description}} &mdash; {{self.since.0.description}}{{/if}}</span>
+{{/eq}}

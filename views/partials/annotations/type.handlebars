@@ -1,0 +1,13 @@
+{{#if self.type}}
+
+  <h3 class="item__sub-heading">Type</h3>
+
+  <p>
+    {{#is self.type '*'}}
+      Any
+    {{else}}
+      <code>{{{formatParamType self.type}}}</code>
+    {{/is}}
+  </p>
+
+{{/if}}

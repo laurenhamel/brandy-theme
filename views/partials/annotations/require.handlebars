@@ -1,0 +1,60 @@
+{{set 'titleDisplayed' false self}}
+{{set 'rootDisplay' self.[@root].display self}}
+
+{{#each self.require}}
+
+  {{#if (and (gt (indexOf ../self.rootDisplay.access item.access) -1) (or (not (and (not ../self.rootDisplay.alias) item.alias)) external))}}
+
+    {{#if (not ../self.titleDisplayed)}}
+
+      {{set 'titleDisplayed' true ../self}}
+
+      <h3 class="item__sub-heading">Requires</h3>
+      <ul class="list-unstyled">
+        
+    {{/if}}
+
+    {{#if external}}
+        
+      <li class="item__description  item__description--inline">
+        
+        <span class="item__cross-type">[external]</span>
+
+        {{#if url}}
+          <a href="{{url}}"><code>{{name}}</code></a>  {{description}}
+        {{else}}
+          <code>{{name}}</code>
+        {{/if}}
+        
+        {{#if description}}
+          &mdash; {{description}}
+        {{/if}}
+        
+      </li>
+
+    {{else}}
+
+      <li class="item__description  item__description--inline">
+        
+        <span class="item__cross-type">[{{item.context.type}}]</span>
+        
+        <a href="#{{item.group}}-{{item.context.type}}-{{item.context.name}}"><code>{{item.context.name}}</code></a>
+        
+        {{#if description}}
+          &mdash; {{description}}
+        {{/if}}
+        
+      </li>
+
+    {{/if}}
+
+  {{/if}}
+
+{{/each}}
+
+{{#if self.titleDisplayed}}
+  </ul>
+{{/if}}
+
+{{unset 'titleDisplayed' self}}
+{{unset 'rootDisplay' self}}

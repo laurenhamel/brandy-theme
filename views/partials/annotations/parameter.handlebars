@@ -1,0 +1,68 @@
+<h3 class="item__sub-heading">Parameters</h3>
+
+{{#if (gt self.parameter.length 0)}}
+
+  <table class="item__parameters">
+    
+    <thead>
+      <tr>
+        <th scope="col">
+          <span class="visually-hidden">{{self.type}} parameter </span>
+          Name
+        </th>
+        <th scope="col">
+          <span class="visually-hidden">{{self.type}} parameter </span>
+          Description
+        </th>
+        <th scope="col">
+          <span class="visually-hidden">{{self.type}} parameter </span>
+          Type
+        </th>
+        <th scope="col">
+          <span class="visually-hidden">{{self.type}} parameter </span>
+          Default value
+        </th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      {{#each self.parameter}}
+        <tr class="item__parameter">
+          <th scope="row" data-label="name">
+            <code>${{name}}</code>
+          </th>
+          <td data-label="desc">
+            {{{default description '&mdash;<span class="visually-hidden"> none</span>'}}}
+          </td>
+          <td data-label="type">
+            <code>
+              {{#is type '*'}}
+                Any
+              {{else}}
+                {{formatParamType type}}
+              {{/is}}
+            </code>
+          </td>
+          <td data-label="default">
+            {{#not default}}
+              &mdash;<span class="visually-hidden"> none</span>
+            {{else}}
+              {{#and (gt (indexOf (lowercase type) 'color') -1) (chroma resolvedValue 'isColor')}}
+                <code class="color-preview--inline" 
+                      style="background: {{resolvedValue}}; color: {{chroma resolvedValue 'inverse' 'css'}};">{{default}}</code>
+              {{else}}
+                <code>{{default}}</code>
+              {{/and}}
+            {{/not}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    
+  </table>
+
+{{else}}
+
+  <p>None.</p>
+
+{{/if}}

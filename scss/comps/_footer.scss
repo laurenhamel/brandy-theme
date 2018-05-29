@@ -2,22 +2,22 @@
   background: color('grey', 'light');
   padding: 1em 0;
   
-  .container { position: relative; }
+  .container { 
+    position: relative; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
-  @include e('project') {
-    
-    @include m('info') { float: left; };
-    
-  };
+  @include e('project-info') { flex-grow: 1; };
   
   @include e('watermark') {
-    position: absolute;
-    right: 0;
-    top: -0.7em;
+    margin-left: 1em;
 
-    img {
+    svg {
       display: block;
-      max-width: 7em;
+      width: 50px;
+      filter: drop-shadow(2px 2px 3px rgba(color('black'), .2));
     }
     
   };

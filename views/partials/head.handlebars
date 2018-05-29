@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{titleize package.name}}{{#if package.version}} - v{{package.version}}{{/if}}</title>
+
+<link rel="stylesheet" href="assets/css/main.css">
+
+<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+<meta property="og:title" content="{{titleize package.name}} - SassDoc">
+<meta property="og:type" content="website">
+
+{{#if package.description}}
+<meta property="og:description" content="{{package.description}}">
+{{else}}
+<meta property="og:description" content="Release the docs!">
+{{/if}}
+
+<link href="{{shortcutIcon.url}}" rel="shortcut icon">

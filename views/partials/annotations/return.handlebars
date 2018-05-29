@@ -1,0 +1,17 @@
+{{#if self.return}}
+
+  <h3 class="item__sub-heading">Returns</h3>
+
+  <div class="item__description item__description--inline">
+    
+    {{#is self.return.type '*'}}
+      Any type
+    {{else}}
+      <code>{{{formatParamType self.return.type}}}</code>
+    {{/is}}
+    
+    {{#if self.return.description}} &mdash; {{{self.return.description}}}{{/if}}
+    
+  </div>
+
+{{/if}}

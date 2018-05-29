@@ -1,0 +1,40 @@
+{{#or package.name display.watermark}}
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      {{#if package.name}}
+        <div class="footer__project-info  project-info">
+          <!-- Name and URL -->
+          {{#if package.homepage}}
+            <a class="project-info__name" href="{{package.homepage}}">{{titleize package.name}}</a>
+          {{else}}
+            <span class="project-info__name">{{titleize package.name}}</span>
+          {{/if}}
+
+          <!-- Version -->
+          {{#if package.version}}<span class="project-info__version"> - v{{package.version}}</span>{{/if}}
+
+          <!-- License -->
+          {{#if package.license}}
+          <span class="project-info__license">, under
+            {{#if package.license.type}}
+              {{#if package.license.url}}
+                <a href="{{package.license.url}}">{{package.license.type}}</a>
+              {{else}}
+                {{package.license.type}}
+              {{/if}}
+            {{else}}
+              {{package.license}}
+            {{/if}}
+            </span>
+          {{/if}}
+        </div>
+      {{/if}}
+
+      {{#if display.watermark}}
+        <a class="footer__watermark" href="{{default package.homepage '//laurenhamel.github.io/brandy'}}">
+          {{> icon}}
+        </a>
+      {{/if}}
+    </div>
+  </footer>
+{{/or}}

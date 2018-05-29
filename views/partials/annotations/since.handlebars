@@ -1,0 +1,13 @@
+{{#if (gt self.since.length 1)}}
+
+  <h3 class="item__sub-heading">Changelog</h3>
+
+  <ul class="list-unstyled">
+
+    {{#each self.since}}
+      <li>{{version}}{{#if description}} &mdash; {{{description}}}{{/if}}</li>
+    {{/each}}
+    
+  </ul>
+
+{{/if}}
