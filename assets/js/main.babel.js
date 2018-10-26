@@ -80,7 +80,7 @@ var Sidebar = function () {
 
       var index = {};
 
-      this.config.nodes.each($.proxy(function (index, item) {
+      this.config.nodes.each($.proxy(function (i, item) {
 
         var $item = $(item);
 
@@ -242,7 +242,6 @@ var Search = function () {
   }, {
     key: 'initSearch',
     value: function initSearch() {
-      var _this2 = this;
 
       var searchForm = $(this.config.search.form);
       var searchInput = $(this.config.search.input);
@@ -312,11 +311,11 @@ var Search = function () {
         if (e.keyCode !== 40 && e.keyCode !== 38) {
 
           currentSelection = -1;
-          suggestions = self.search($(_this2).val());
+          suggestions = self.search($(searchInput).val());
         } else e.preventDefault();
       }).on('search', function () {
 
-        suggestions = self.search($(_this2).val());
+        suggestions = self.search($(searchInput).val());
       });
     }
   }]);
@@ -369,7 +368,7 @@ var App = function () {
   }, {
     key: 'autoIndent',
     value: function autoIndent(code) {
-      var _this3 = this;
+      var _this2 = this;
 
       code = code.split(/\r?\n/);
 
@@ -387,15 +386,15 @@ var App = function () {
 
         if (index !== 0) {
 
-          if (_this3.config.indentUp.includes(prevChar)) ++currIndents;
-          if (_this3.config.indentDown.includes(nextChar)) --currIndents;
+          if (_this2.config.indentUp.includes(prevChar)) ++currIndents;
+          if (_this2.config.indentDown.includes(nextChar)) --currIndents;
         }
 
         var lineIndents = indentChar.repeat(currIndents);
 
         prevIndents = currIndents;
-        prevChar = _this3.__lastChar(lineCode);
-        nextChar = array[index + 1] ? _this3.__firstChar(array[index + 1]) : '';
+        prevChar = _this2.__lastChar(lineCode);
+        nextChar = array[index + 1] ? _this2.__firstChar(array[index + 1]) : '';
 
         return '' + lineIndents + lineCode;
       }, this).join("\n");
@@ -403,7 +402,7 @@ var App = function () {
   }, {
     key: 'codePreview',
     value: function codePreview() {
-      var _this4 = this;
+      var _this3 = this;
 
       var $autos = $('.' + this.config.indentClass);
       var $toggle = $('.item__code--togglable');
@@ -412,7 +411,7 @@ var App = function () {
 
         var $code = $(auto).is('code') ? $(auto) : $(auto).find('code');
 
-        $code.html(_this4.autoIndent($code.html()));
+        $code.html(_this3.autoIndent($code.html()));
       }).bind(this);
 
       $toggle.on('click', function () {
@@ -420,7 +419,7 @@ var App = function () {
         var $item = $(event.target).closest($toggle);
         var $code = $item.find('code');
         var switchTo = $item.attr('data-current-state') === 'expanded' ? 'collapsed' : 'expanded';
-        var code = _this4.autoIndent($item.attr('data-' + switchTo));
+        var code = _this3.autoIndent($item.attr('data-' + switchTo));
 
         $item.attr('data-current-state', switchTo);
         $code.html(code);

@@ -72,7 +72,7 @@ class Sidebar {
     
     let index = {};
 
-    this.config.nodes.each($.proxy(function (index, item) {
+    this.config.nodes.each($.proxy(function (i, item) {
       
       let $item = $(item);
 
@@ -304,10 +304,10 @@ class Search {
 
     searchInput.on('keyup', (e) => {
       
-      if (e.keyCode !== 40 && e.keyCode !== 38) {
+      if (e.keyCode !== 40 && e.keyCode !== 38) { 
         
         currentSelection = -1;
-        suggestions = self.search($(this).val());
+        suggestions = self.search($(searchInput).val());
         
       }
 
@@ -315,7 +315,7 @@ class Search {
 
     }).on('search', () => {
       
-      suggestions = self.search($(this).val());
+      suggestions = self.search($(searchInput).val());
       
     });
     
